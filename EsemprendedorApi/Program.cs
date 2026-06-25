@@ -1,0 +1,65 @@
+using EsemprendedorApi.Infrastructure;
+using EsemprendedorApi.Infrastructure.Persistence;
+using EsemprendedorApi.Infrastructure.Seeders;
+using Microsoft.EntityFrameworkCore;
+
+var builder = WebApplication.CreateBuilder(args);
+
+// ── Infrastructure (DB, Repositories, Services) ───────────────────────────────
+builder.Services.AddInfrastructure(builder.Configuration);
+
+// ── CORS ──────────────────────────────────────────────────────────────────────
+var allowedOrigins = builder.Configuration
+    .GetSection("Cors:AllowedOrigins")
+    .Get<string[]>() ?? Array.Empty<string>();
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(policy =>
+        policy.WithOrigins(allowedOrigins)
+              .AllowAnyHeader()
+              .AllowAnyMethod());
+});
+
+// ── Controllers & JSON ────────────────────────────────────────────────────────
+// AddControllers scans all assemblies in the project; Presentation/Controllers
+// is discovered automatically because it lives in the same assembly.
+builder.Services.AddControllers()
+    .AddJsonOptions(opts =>
+        opts.JsonSerializerOptions.PropertyNamingPolicy =
+            System.Text.Json.JsonNamingPolicy.CamelCase);
+
+// ── Swagger / OpenAPI ─────────────────────────────────────────────────────────
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo
+    {
+        Title = "Esemprendedor API",
+        Version = "v1",
+        Description = "API for administrating cards and sections of the Esemprendedor directory."
+    });
+});
+
+var app = builder.Build();
+
+// ── Migrate & Seed ────────────────────────────────────────────────────────────
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+    await DatabaseSeeder.SeedAsync(db);
+}
+
+// ── Middleware ────────────────────────────────────────────────────────────────
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Esemprendedor API v1"));
+}
+
+app.UseHttpsRedirection();
+app.UseCors();
+app.MapControllers();
+
+app.Run();
