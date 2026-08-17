@@ -1,4 +1,4 @@
-using EsemprendedorApi.Infrastructure;
+﻿using EsemprendedorApi.Infrastructure;
 using EsemprendedorApi.Infrastructure.Persistence;
 using EsemprendedorApi.Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;
@@ -7,9 +7,6 @@ var builder = WebApplication.CreateBuilder(args);
 
 // ── Infrastructure (DB, Repositories, Services) ───────────────────────────────
 builder.Services.AddInfrastructure(builder.Configuration);
-
-// ── Razor Pages (Dashboard) ────────────────────────────────────────────────────
-builder.Services.AddRazorPages();
 
 // ── CORS ──────────────────────────────────────────────────────────────────────
 var allowedOrigins = builder.Configuration
@@ -62,14 +59,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles(); // serve wwwroot (dashboard CSS, client assets)
 app.UseCors();
 app.MapControllers();
-
-// Map Razor Pages (dashboard)
-app.MapRazorPages();
-
-// Optional: redirect root to dashboard
-app.MapGet("/", () => Results.Redirect("/Dashboard/Sections"));
 
 app.Run();

@@ -1,0 +1,46 @@
+[
+  {
+    "sectionTitle": "Gastronomía",
+    "icon": "??",
+    "chip": "Panadería · Confitería",
+    "name": "Bruzzone (Mock)",
+    "service": "Tortas, cheesecakes y productos artesanales elaborados con dedicación.",
+    "contact": "?? Mendez 206, Glew · ?? +54 9 11 1111-1111",
+    "featured": true,
+    "backgroundImage": "assets/panabruzzone.png",
+    "keywords": "tortas,pasteleria,panaderia"
+  },
+  {
+    "sectionTitle": "Gastronomía",
+    "icon": "???",
+    "chip": "Catering",
+    "name": "Mountain Dew Catering (Mock)",
+    "service": "Desayunos especiales · Bandejas dulces.",
+    "contact": "?? @mountaindewcatering",
+    "featured": false,
+    "backgroundImage": null,
+    "keywords": "catering,eventos"
+  },
+  {
+    "sectionTitle": "Servicios",
+    "icon": "??",
+    "chip": "Reparaciones",
+    "name": "Taller Express (Mock)",
+    "service": "Reparación rápida de electrodomésticos.",
+    "contact": "?? +54 9 11 2222-2222",
+    "featured": false,
+    "backgroundImage": null,
+    "keywords": "reparacion,servicio"
+  },
+  {
+    "sectionTitle": "Tecnología",
+    "icon": "??",
+    "chip": "Desarrollo · Soporte",
+    "name": "DevHelpers (Mock)",
+    "service": "Desarrollo web y soporte técnico para PYMEs.",
+    "contact": "?? contact@devhelpers.mock",
+    "featured": false,
+    "backgroundImage": null,
+    "keywords": "desarrollo,soporte,it"
+  }
+]

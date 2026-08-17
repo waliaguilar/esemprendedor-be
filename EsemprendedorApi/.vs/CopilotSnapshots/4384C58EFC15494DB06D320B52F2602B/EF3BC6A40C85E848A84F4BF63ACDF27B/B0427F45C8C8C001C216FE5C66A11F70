@@ -1,4 +1,4 @@
-using EsemprendedorApi.Infrastructure;
+﻿using EsemprendedorApi.Infrastructure;
 using EsemprendedorApi.Infrastructure.Persistence;
 using EsemprendedorApi.Infrastructure.Seeders;
 using Microsoft.EntityFrameworkCore;

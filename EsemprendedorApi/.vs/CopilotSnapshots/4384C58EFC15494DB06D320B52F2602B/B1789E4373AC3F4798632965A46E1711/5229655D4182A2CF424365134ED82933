@@ -1,0 +1,84 @@
+﻿@page
+@model EsemprendedorApi.Pages.Dashboard.IndexModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Esemprendedor — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Esemprendedor — Dashboard</h1>
+    <p class="subtitle">Sections, Cards and SimpleCards</p>
+  </header>
+
+  <main class="container">
+    @if (!Model.Sections.Any())
+    {
+      <div class="empty">No sections found.</div>
+    }
+    else
+    {
+      foreach (var s in Model.Sections)
+      {
+        <section class="section-card @(s.BgLight ? "light" : "dark")">
+          <div class="section-header">
+            <h2>@s.Title <span class="slug">(@s.Slug)</span></h2>
+            <div class="meta">@s.Label</div>
+          </div>
+
+          <div class="grid">
+            <div class="column">
+              <h3>Cards (@s.Cards.Count)</h3>
+              <ul class="items">
+                @foreach (var c in s.Cards)
+                {
+                  <li class="item @(c.Featured ? "featured" : "")">
+                    <div class="item-left">
+                      <div class="icon">@c.Icon</div>
+                      <div class="info">
+                        <div class="name">@c.Name</div>
+                        <div class="chip">@c.Chip</div>
+                      </div>
+                    </div>
+                    <div class="item-right">
+                      <div class="service">@Html.Raw(c.Service)</div>
+                      <div class="contact">@Html.Raw(c.Contact)</div>
+                    </div>
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <div class="column">
+              <h3>SimpleCards (@s.SimpleCards.Count)</h3>
+              <ul class="items">
+                @foreach (var sc in s.SimpleCards)
+                {
+                  <li class="item">
+                    <div class="name">@sc.Name</div>
+                    <div class="service">@Html.Raw(sc.Service)</div>
+                    <div class="contact">@Html.Raw(sc.Contact)</div>
+                  </li>
+                }
+              </ul>
+
+              <h4>Keywords</h4>
+              <div class="keywords">@s.Keywords</div>
+            </div>
+          </div>
+        </section>
+      }
+    }
+  </main>
+
+  <footer class="footer">
+    <small>Auto-migrations & seeder run on startup.</small>
+  </footer>
+</body>
+</html>

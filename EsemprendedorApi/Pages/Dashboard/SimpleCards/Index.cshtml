@@ -1,0 +1,110 @@
+@page
+@model EsemprendedorApi.Pages.Dashboard.SimpleCards.IndexModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SimpleCards — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>SimpleCards — Dashboard</h1>
+    <p class="subtitle">Manage lightweight entries</p>
+    <nav class="nav-menu">
+      <a href="/Dashboard/Sections">Sections</a>
+      <a href="/Dashboard/Cards">Cards</a>
+      <a href="/Dashboard/SimpleCards">SimpleCards</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <h2>Create SimpleCard</h2>
+      <form method="post" asp-page-handler="Create" class="crud-form">
+        <select name="Input.SectionId" required>
+          <option value="">-- Section --</option>
+          @foreach (var s in Model.SectionsList) { <option value="@s.Id">@s.Title</option> }
+        </select>
+        <input name="Input.Name" placeholder="Name" required />
+        <input name="Input.Service" placeholder="Service (description)" style="min-width:300px" required />
+        <input name="Input.Contact" placeholder="Contact" required />
+        <input name="Input.Keywords" placeholder="Keywords" />
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </section>
+
+    <section class="section-card">
+      <h2>SimpleCards</h2>
+      @if (!Model.SimpleCards.Any())
+      {
+        <div class="empty">No simple cards found.</div>
+      }
+      else
+      {
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Service</th>
+              <th>Contact</th>
+              <th>Section</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var sc in Model.SimpleCards)
+            {
+              <tr>
+                <td><strong>@sc.Name</strong></td>
+                <td>@sc.Service</td>
+                <td>@sc.Contact</td>
+                <td>@sc.SectionTitle</td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-edit" onclick="showEditSimple@(sc.Id)()">Edit</button>
+                  <form method="post" asp-page-handler="Delete" style="display:inline;">
+                    <input type="hidden" name="id" value="@sc.Id" />
+                    <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Delete simple card @sc.Name ?')">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              <tr id="edit-simple-row-@sc.Id" class="edit-row" style="display:none;">
+                <td colspan="5">
+                  <form method="post" asp-page-handler="Edit" class="crud-form edit-form">
+                    <input type="hidden" name="id" value="@sc.Id" />
+                    <select name="Input.SectionId" required>
+                      @foreach (var s in Model.SectionsList) { <option value="@s.Id" @(s.Id == sc.SectionId ? "selected" : "")>@s.Title</option> }
+                    </select>
+                    <input name="Input.Name" value="@sc.Name" placeholder="Name" required />
+                    <input name="Input.Service" value="@sc.Service" placeholder="Service" style="min-width:300px" required />
+                    <input name="Input.Contact" value="@sc.Contact" placeholder="Contact" required />
+                    <input name="Input.Keywords" value="@sc.Keywords" placeholder="Keywords" />
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideEditSimple@(sc.Id)()">Cancel</button>
+                  </form>
+                </td>
+              </tr>
+              <script>
+                function showEditSimple@(sc.Id)() {
+                  document.getElementById('edit-simple-row-@sc.Id').style.display = 'table-row';
+                }
+                function hideEditSimple@(sc.Id)() {
+                  document.getElementById('edit-simple-row-@sc.Id').style.display = 'none';
+                }
+              </script>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>SimpleCards are lightweight items linked to Sections.</small>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,267 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\pages\\dashboard\\sections\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:pages\\dashboard\\sections\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\pages\\dashboard\\sections\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:pages\\dashboard\\sections\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\wwwroot\\css\\dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:wwwroot\\css\\dashboard.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\pages\\dashboard\\cards\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:pages\\dashboard\\cards\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\pages\\dashboard\\cards\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:pages\\dashboard\\cards\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\wwwroot\\mock\\cards.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:wwwroot\\mock\\cards.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\pages\\dashboard\\simplecards\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:pages\\dashboard\\simplecards\\index.cshtml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|c:\\git\\esemprendedor-be\\esemprendedorapi\\pages\\dashboard\\simplecards\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{5ED665AC-7502-D6EC-8F43-0E0362962CCE}|EsemprendedorApi.csproj|solutionrelative:pages\\dashboard\\simplecards\\index.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:3:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\SimpleCards\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\SimpleCards\\Index.cshtml",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\SimpleCards\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Dashboard\\SimpleCards\\Index.cshtml",
+              "ViewState": "AgIAAGwAAAAAAAAAAIBJwG4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-25T13:02:59.193Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\SimpleCards\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\SimpleCards\\Index.cshtml.cs",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\SimpleCards\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\Dashboard\\SimpleCards\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAHIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T13:02:47.228Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "cards.json",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\wwwroot\\mock\\cards.json",
+              "RelativeDocumentMoniker": "wwwroot\\mock\\cards.json",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\wwwroot\\mock\\cards.json",
+              "RelativeToolTip": "wwwroot\\mock\\cards.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAC4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-25T13:02:32.843Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Cards\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\Cards\\Index.cshtml",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Cards\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Dashboard\\Cards\\Index.cshtml",
+              "ViewState": "AgIAAHYAAAAAAAAAAIBJwHgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-25T13:02:18.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Cards\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\Cards\\Index.cshtml.cs",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Cards\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\Dashboard\\Cards\\Index.cshtml.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAMEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T13:01:32.966Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T12:59:50.055Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "README.md",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AgIAAAAAAAAAAAAAAADwvwAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2026-07-25T12:31:13.777Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:1:0:{d212f56b-c48a-434c-a121-1c5d80b59b9f}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Index.cshtml.cs",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Sections\\Index.cshtml.cs",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\Sections\\Index.cshtml.cs",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Sections\\Index.cshtml.cs",
+              "RelativeToolTip": "Pages\\Dashboard\\Sections\\Index.cshtml.cs",
+              "ViewState": "AgIAAHsAAAAAAAAAAGBiwIAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-25T13:00:11.735Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Index.cshtml",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Sections\\Index.cshtml",
+              "RelativeDocumentMoniker": "Pages\\Dashboard\\Sections\\Index.cshtml",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Pages\\Dashboard\\Sections\\Index.cshtml",
+              "RelativeToolTip": "Pages\\Dashboard\\Sections\\Index.cshtml",
+              "ViewState": "AgIAAIwAAAAAAAAAAIBJwI4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2026-07-25T13:00:25.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "dashboard.css",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\wwwroot\\css\\dashboard.css",
+              "RelativeDocumentMoniker": "wwwroot\\css\\dashboard.css",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\wwwroot\\css\\dashboard.css",
+              "RelativeToolTip": "wwwroot\\css\\dashboard.css",
+              "ViewState": "AgIAANAAAAAAAAAAAIBJwNIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-07-25T13:00:39.908Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\Properties\\launchSettings.json",
+              "RelativeToolTip": "Properties\\launchSettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-25T12:29:34.194Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-25T12:29:22.671Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Git\\esemprendedor-be\\EsemprendedorApi\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-25T12:29:17.872Z",
+              "EditorCaption": ""
+            }
+          ]
+        },
+        {
+          "DockedWidth": 946,
+          "SelectedChildIndex": -1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{34e76e81-ee4a-11d0-ae2e-00a0c90fffc3}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{a80febb4-e7e0-4147-b476-21aaf2453969}"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

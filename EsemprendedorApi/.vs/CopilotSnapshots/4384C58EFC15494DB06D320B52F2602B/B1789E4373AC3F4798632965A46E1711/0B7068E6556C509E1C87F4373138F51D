@@ -1,0 +1,120 @@
+﻿@page
+@model EsemprendedorApi.Pages.Dashboard.Cards.IndexModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cards — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Cards — Dashboard</h1>
+    <p class="subtitle">Create, edit and delete cards</p>
+    <nav class="nav-menu">
+      <a href="/Dashboard/Sections">Sections</a>
+      <a href="/Dashboard/Cards">Cards</a>
+      <a href="/Dashboard/SimpleCards">SimpleCards</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <h2>Create Card</h2>
+      <form method="post" asp-page-handler="Create" class="crud-form">
+        <select name="Input.SectionId" required>
+          <option value="">-- Section --</option>
+          @foreach (var s in Model.SectionsList) { <option value="@s.Id">@s.Title</option> }
+        </select>
+        <input name="Input.Icon" placeholder="Icon (emoji/text)" />
+        <input name="Input.Chip" placeholder="Chip (category)" required />
+        <input name="Input.Name" placeholder="Name" required />
+        <input name="Input.Service" placeholder="Service (description)" style="min-width:250px" required />
+        <input name="Input.Contact" placeholder="Contact" required />
+        <input name="Input.BackgroundImage" placeholder="BackgroundImage (optional URL)" />
+        <input name="Input.Keywords" placeholder="Keywords" />
+        <label class="checkbox-label"><input type="checkbox" name="Input.Featured" /> Featured</label>
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </section>
+
+    <section class="section-card">
+      <h2>Cards</h2>
+      @if (!Model.Cards.Any())
+      {
+        <div class="empty">No cards found.</div>
+      }
+      else
+      {
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th>Icon</th>
+              <th>Name</th>
+              <th>Chip</th>
+              <th>Section</th>
+              <th>Featured</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var c in Model.Cards)
+            {
+              <tr class="@(c.Featured ? "featured-row" : "")">
+                <td><span class="icon">@c.Icon</span></td>
+                <td><strong>@c.Name</strong></td>
+                <td>@c.Chip</td>
+                <td>@c.SectionTitle</td>
+                <td>@(c.Featured ? "Yes" : "No")</td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-edit" onclick="showEditCard@(c.Id)()">Edit</button>
+                  <form method="post" asp-page-handler="Delete" style="display:inline;">
+                    <input type="hidden" name="id" value="@c.Id" />
+                    <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Delete card @c.Name ?')">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              <tr id="edit-card-row-@c.Id" class="edit-row" style="display:none;">
+                <td colspan="6">
+                  <form method="post" asp-page-handler="Edit" class="crud-form edit-form">
+                    <input type="hidden" name="id" value="@c.Id" />
+                    <select name="Input.SectionId" required>
+                      @foreach (var s in Model.SectionsList) { <option value="@s.Id" @(s.Id == c.SectionId ? "selected" : "")>@s.Title</option> }
+                    </select>
+                    <input name="Input.Icon" value="@c.Icon" placeholder="Icon" />
+                    <input name="Input.Chip" value="@c.Chip" placeholder="Chip" required />
+                    <input name="Input.Name" value="@c.Name" placeholder="Name" required />
+                    <input name="Input.Service" value="@c.Service" placeholder="Service" style="min-width:250px" required />
+                    <input name="Input.Contact" value="@c.Contact" placeholder="Contact" required />
+                    <input name="Input.BackgroundImage" value="@c.BackgroundImage" placeholder="BackgroundImage" />
+                    <input name="Input.Keywords" value="@c.Keywords" placeholder="Keywords" />
+                    <label class="checkbox-label"><input type="checkbox" name="Input.Featured" @(c.Featured ? "checked" : "") /> Featured</label>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideEditCard@(c.Id)()">Cancel</button>
+                  </form>
+                </td>
+              </tr>
+              <script>
+                function showEditCard@(c.Id)() {
+                  document.getElementById('edit-card-row-@c.Id').style.display = 'table-row';
+                }
+                function hideEditCard@(c.Id)() {
+                  document.getElementById('edit-card-row-@c.Id').style.display = 'none';
+                }
+              </script>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Cards are linked to Sections. Reload to update counts.</small>
+  </footer>
+</body>
+</html>

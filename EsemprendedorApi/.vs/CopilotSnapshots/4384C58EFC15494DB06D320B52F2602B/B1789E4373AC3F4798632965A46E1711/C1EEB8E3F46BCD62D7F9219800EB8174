@@ -1,0 +1,90 @@
+﻿@page
+@model EsemprendedorApi.Pages.Dashboard.SimpleCards.IndexModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>SimpleCards — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>SimpleCards — Dashboard</h1>
+    <p class="subtitle">Manage lightweight entries</p>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <h2>Create SimpleCard</h2>
+      <form method="post" asp-page-handler="Create">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <select name="Input.SectionId" required>
+            <option value="">-- Section --</option>
+            @foreach (var s in Model.SectionsList) { <option value="@s.Id">@s.Title</option> }
+          </select>
+          <input name="Input.Name" placeholder="Name" required />
+          <input name="Input.Service" placeholder="Service (description)" style="min-width:300px" required />
+          <input name="Input.Contact" placeholder="Contact" required />
+          <input name="Input.Keywords" placeholder="Keywords" />
+          <button type="submit">Create</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="section-card">
+      <h2>SimpleCards</h2>
+      @if (!Model.SimpleCards.Any())
+      {
+        <div class="empty">No simple cards found.</div>
+      }
+      else
+      {
+        <ul class="items">
+          @foreach (var sc in Model.SimpleCards)
+          {
+            <li class="item">
+              <div style="flex:1 1 auto;">
+                <strong>@sc.Name</strong> <small class="muted">(@sc.SectionTitle)</small>
+                <div class="muted">@Html.Raw(sc.Service)</div>
+                <div class="muted">@Html.Raw(sc.Contact)</div>
+              </div>
+
+              <div style="display:flex;gap:6px;align-items:center;">
+                <form method="post" asp-page-handler="Delete" style="display:inline;">
+                  <input type="hidden" name="id" value="@sc.Id" />
+                  <button type="submit" onclick="return confirm('Delete simple card @sc.Name ?')">Delete</button>
+                </form>
+              </div>
+
+              <details style="margin-top:8px;">
+                <summary>Edit</summary>
+                <form method="post" asp-page-handler="Edit">
+                  <input type="hidden" name="id" value="@sc.Id" />
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+                    <select name="Input.SectionId" required>
+                      @foreach (var s in Model.SectionsList) { <option value="@s.Id" @(s.Id == sc.SectionId ? "selected" : "")>@s.Title</option> }
+                    </select>
+                    <input name="Input.Name" value="@sc.Name" required />
+                    <input name="Input.Service" value="@sc.Service" style="min-width:300px" required />
+                    <input name="Input.Contact" value="@sc.Contact" required />
+                    <input name="Input.Keywords" value="@sc.Keywords" />
+                    <button type="submit">Save</button>
+                  </div>
+                </form>
+              </details>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>SimpleCards are lightweight items linked to Sections.</small>
+  </footer>
+</body>
+</html>

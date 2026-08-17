@@ -1,0 +1,98 @@
+﻿@page
+@model EsemprendedorApi.Pages.Dashboard.Cards.IndexModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Cards — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>Cards — Dashboard</h1>
+    <p class="subtitle">Create, edit and delete cards</p>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <h2>Create Card</h2>
+      <form method="post" asp-page-handler="Create">
+        <div style="display:flex;gap:8px;flex-wrap:wrap;">
+          <select name="Input.SectionId" required>
+            <option value="">-- Section --</option>
+            @foreach (var s in Model.SectionsList) { <option value="@s.Id">@s.Title</option> }
+          </select>
+          <input name="Input.Icon" placeholder="Icon (emoji/text)" />
+          <input name="Input.Chip" placeholder="Chip (category)" required />
+          <input name="Input.Name" placeholder="Name" required />
+          <input name="Input.BackgroundImage" placeholder="BackgroundImage (optional URL)" />
+          <input name="Input.Keywords" placeholder="Keywords" />
+          <input name="Input.Service" placeholder="Service (description)" style="min-width:300px" required />
+          <input name="Input.Contact" placeholder="Contact" required />
+          <label><input type="checkbox" name="Input.Featured" /> Featured</label>
+          <button type="submit">Create</button>
+        </div>
+      </form>
+    </section>
+
+    <section class="section-card">
+      <h2>Cards</h2>
+      @if (!Model.Cards.Any())
+      {
+        <div class="empty">No cards found.</div>
+      }
+      else
+      {
+        <ul class="items">
+          @foreach (var c in Model.Cards)
+          {
+            <li class="item @(c.Featured ? "featured" : "")">
+              <div style="flex:1 1 auto;">
+                <div><span class="icon">@c.Icon</span> <strong>@c.Name</strong> <small class="muted">(@c.Chip) — @c.SectionTitle</small></div>
+                <div class="muted">@Html.Raw(c.Service)</div>
+                <div class="muted">@Html.Raw(c.Contact)</div>
+              </div>
+
+              <div style="display:flex;gap:6px;align-items:center;">
+                <form method="post" asp-page-handler="Delete" style="display:inline;">
+                  <input type="hidden" name="id" value="@c.Id" />
+                  <button type="submit" onclick="return confirm('Delete card @c.Name ?')">Delete</button>
+                </form>
+              </div>
+
+              <details style="margin-top:8px;">
+                <summary>Edit</summary>
+                <form method="post" asp-page-handler="Edit">
+                  <input type="hidden" name="id" value="@c.Id" />
+                  <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;">
+                    <select name="Input.SectionId" required>
+                      @foreach (var s in Model.SectionsList) { <option value="@s.Id" @(s.Id == c.SectionId ? "selected" : "")>@s.Title</option> }
+                    </select>
+                    <input name="Input.Icon" value="@c.Icon" />
+                    <input name="Input.Chip" value="@c.Chip" required />
+                    <input name="Input.Name" value="@c.Name" required />
+                    <input name="Input.BackgroundImage" value="@c.BackgroundImage" />
+                    <input name="Input.Keywords" value="@c.Keywords" />
+                    <input name="Input.Service" value="@c.Service" style="min-width:300px" required />
+                    <input name="Input.Contact" value="@c.Contact" required />
+                    <label><input type="checkbox" name="Input.Featured" @(c.Featured ? "checked" : "") /> Featured</label>
+                    <button type="submit">Save</button>
+                  </div>
+                </form>
+              </details>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Cards are linked to Sections. Reload to update counts.</small>
+  </footer>
+</body>
+</html>

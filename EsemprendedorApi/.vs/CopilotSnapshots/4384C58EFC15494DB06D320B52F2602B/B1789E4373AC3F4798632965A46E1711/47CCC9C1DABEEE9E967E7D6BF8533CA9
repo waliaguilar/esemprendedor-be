@@ -1,0 +1,128 @@
+﻿using System.Text.Json;
+using EsemprendedorApi.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+
+namespace EsemprendedorApi.Pages.Dashboard.Sections;
+
+public class IndexModel : PageModel
+{
+    private readonly AppDbContext _db;
+
+    public IndexModel(AppDbContext db) => _db = db;
+
+    public List<SectionView> Sections { get; set; } = new();
+
+    // Data prepared for charting
+    public List<SectionChart> ChartData { get; set; } = new();
+
+    [BindProperty]
+    public SectionInput? Input { get; set; }
+
+    public async Task OnGetAsync()
+    {
+        var sections = await _db.Sections
+            .Include(s => s.Cards)
+            .Include(s => s.SimpleCards)
+            .OrderBy(s => s.Title)
+            .ToListAsync();
+
+        Sections = sections.Select(s => new SectionView
+        {
+            Id = s.Id,
+            Title = s.Title,
+            Slug = s.Slug,
+            Label = s.Label,
+            BgLight = s.BgLight,
+            Keywords = s.Keywords,
+            CardsCount = s.Cards?.Count ?? 0,
+            SimpleCardsCount = s.SimpleCards?.Count ?? 0
+        }).ToList();
+
+        ChartData = Sections.Select(s => new SectionChart
+        {
+            Title = s.Title ?? s.Slug,
+            Cards = s.CardsCount,
+            SimpleCards = s.SimpleCardsCount
+        }).ToList();
+    }
+
+    public async Task<IActionResult> OnPostCreateAsync()
+    {
+        if (Input == null || string.IsNullOrWhiteSpace(Input.Title) || string.IsNullOrWhiteSpace(Input.Slug))
+            return BadRequest();
+
+        var section = new Domain.Entities.Section
+        {
+            Title = Input.Title.Trim(),
+            Slug = Input.Slug.Trim(),
+            Label = Input.Label?.Trim(),
+            BgLight = Input.BgLight,
+            Keywords = Input.Keywords?.Trim()
+        };
+
+        _db.Sections.Add(section);
+        await _db.SaveChangesAsync();
+
+        return RedirectToPage();
+    }
+
+    public async Task<IActionResult> OnPostEditAsync(int id)
+    {
+        if (Input == null)
+            return BadRequest();
+
+        var section = await _db.Sections.FindAsync(id);
+        if (section == null)
+            return NotFound();
+
+        // apply values
+        section.Title = Input.Title?.Trim();
+        section.Slug = Input.Slug?.Trim();
+        section.Label = Input.Label?.Trim();
+        section.BgLight = Input.BgLight;
+        section.Keywords = Input.Keywords?.Trim();
+
+        await _db.SaveChangesAsync();
+        return RedirectToPage();
+    }
+
+    public async Task<IActionResult> OnPostDeleteAsync(int id)
+    {
+        var section = await _db.Sections.FindAsync(id);
+        if (section == null) return NotFound();
+
+        _db.Sections.Remove(section);
+        await _db.SaveChangesAsync();
+        return RedirectToPage();
+    }
+
+    public record SectionView
+    {
+        public int Id { get; init; }
+        public string? Title { get; init; }
+        public string? Slug { get; init; }
+        public string? Label { get; init; }
+        public bool BgLight { get; init; }
+        public string? Keywords { get; init; }
+        public int CardsCount { get; init; }
+        public int SimpleCardsCount { get; init; }
+    }
+
+    public record SectionChart
+    {
+        public string? Title { get; init; }
+        public int Cards { get; init; }
+        public int SimpleCards { get; init; }
+    }
+
+    public class SectionInput
+    {
+        public string? Title { get; set; }
+        public string? Slug { get; set; }
+        public string? Label { get; set; }
+        public bool BgLight { get; set; }
+        public string? Keywords { get; set; }
+    }
+}

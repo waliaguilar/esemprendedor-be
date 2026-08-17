@@ -1,0 +1,83 @@
+﻿using EsemprendedorApi.Infrastructure.Persistence;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+
+namespace EsemprendedorApi.Pages.Dashboard;
+
+public class IndexModel : PageModel
+{
+    private readonly AppDbContext _db;
+
+    public IndexModel(AppDbContext db) => _db = db;
+
+    public List<SectionViewModel> Sections { get; set; } = new();
+
+    public async Task OnGetAsync()
+    {
+        var sections = await _db.Sections
+            .Include(s => s.Cards)
+            .Include(s => s.SimpleCards)
+            .OrderBy(s => s.Title)
+            .ToListAsync();
+
+        Sections = sections.Select(s => new SectionViewModel
+        {
+            Id = s.Id,
+            Title = s.Title,
+            Slug = s.Slug,
+            Label = s.Label,
+            BgLight = s.BgLight,
+            Keywords = s.Keywords,
+            Cards = s.Cards.OrderBy(c => c.Name).Select(c => new CardDto
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Chip = c.Chip,
+                Icon = c.Icon,
+                Service = c.Service,
+                Contact = c.Contact,
+                Featured = c.Featured,
+                BackgroundImage = c.BackgroundImage
+            }).ToList(),
+            SimpleCards = s.SimpleCards.OrderBy(sc => sc.Name).Select(sc => new SimpleCardDto
+            {
+                Id = sc.Id,
+                Name = sc.Name,
+                Service = sc.Service,
+                Contact = sc.Contact
+            }).ToList()
+        }).ToList();
+    }
+
+    public record SectionViewModel
+    {
+        public int Id { get; init; }
+        public string? Title { get; init; }
+        public string? Slug { get; init; }
+        public string? Label { get; init; }
+        public bool BgLight { get; init; }
+        public string? Keywords { get; init; }
+        public List<CardDto> Cards { get; init; } = new();
+        public List<SimpleCardDto> SimpleCards { get; init; } = new();
+    }
+
+    public record CardDto
+    {
+        public int Id { get; init; }
+        public string? Name { get; init; }
+        public string? Chip { get; init; }
+        public string? Icon { get; init; }
+        public string? Service { get; init; }
+        public string? Contact { get; init; }
+        public bool Featured { get; init; }
+        public string? BackgroundImage { get; init; }
+    }
+
+    public record SimpleCardDto
+    {
+        public int Id { get; init; }
+        public string? Name { get; init; }
+        public string? Service { get; init; }
+        public string? Contact { get; init; }
+    }
+}

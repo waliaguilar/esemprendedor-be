@@ -1,0 +1,142 @@
+﻿@page
+@model EsemprendedorApi.Pages.Dashboard.Sections.IndexModel
+@using System.Text.Json
+@{
+    Layout = null;
+    var chartJson = JsonSerializer.Serialize(Model.ChartData);
+}
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Sections — Dashboard</title>
+  <link rel="stylesheet" href="/css/dashboard.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <h1>Sections — Dashboard</h1>
+    <p class="subtitle">Manage Sections — create, edit, delete — and visualize counts</p>
+    <nav class="nav-menu">
+      <a href="/Dashboard/Sections">Sections</a>
+      <a href="/Dashboard/Cards">Cards</a>
+      <a href="/Dashboard/SimpleCards">SimpleCards</a>
+    </nav>
+  </header>
+
+  <main class="container">
+    <section class="section-card">
+      <h2>Create Section</h2>
+      <form method="post" asp-page-handler="Create" class="crud-form">
+        <input name="Input.Title" placeholder="Title" required />
+        <input name="Input.Slug" placeholder="Slug" required />
+        <input name="Input.Label" placeholder="Label" />
+        <label class="checkbox-label"><input type="checkbox" name="Input.BgLight" /> BgLight</label>
+        <input name="Input.Keywords" placeholder="Keywords (comma separated)" style="min-width:300px" />
+        <button type="submit" class="btn btn-primary">Create</button>
+      </form>
+    </section>
+
+    <section class="section-card">
+      <h2>Sections</h2>
+      @if (!Model.Sections.Any())
+      {
+        <div class="empty">No sections found.</div>
+      }
+      else
+      {
+        <table class="crud-table">
+          <thead>
+            <tr>
+              <th>Title</th>
+              <th>Slug</th>
+              <th>Label</th>
+              <th>BgLight</th>
+              <th>Cards</th>
+              <th>SimpleCards</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach (var s in Model.Sections)
+            {
+              <tr>
+                <td><strong>@s.Title</strong></td>
+                <td><span class="slug">@s.Slug</span></td>
+                <td>@s.Label</td>
+                <td>@(s.BgLight ? "Yes" : "No")</td>
+                <td>@s.CardsCount</td>
+                <td>@s.SimpleCardsCount</td>
+                <td class="actions">
+                  <button class="btn btn-sm btn-edit" onclick="showEdit@(s.Id)()">Edit</button>
+                  <form method="post" asp-page-handler="Delete" style="display:inline;">
+                    <input type="hidden" name="id" value="@s.Id" />
+                    <button type="submit" class="btn btn-sm btn-delete" onclick="return confirm('Delete section @s.Title ?')">Delete</button>
+                  </form>
+                </td>
+              </tr>
+              <tr id="edit-row-@s.Id" class="edit-row" style="display:none;">
+                <td colspan="7">
+                  <form method="post" asp-page-handler="Edit" class="crud-form edit-form">
+                    <input type="hidden" name="id" value="@s.Id" />
+                    <input name="Input.Title" value="@s.Title" placeholder="Title" required />
+                    <input name="Input.Slug" value="@s.Slug" placeholder="Slug" required />
+                    <input name="Input.Label" value="@s.Label" placeholder="Label" />
+                    <label class="checkbox-label"><input type="checkbox" name="Input.BgLight" @(s.BgLight ? "checked" : "") /> BgLight</label>
+                    <input name="Input.Keywords" value="@s.Keywords" placeholder="Keywords" style="min-width:300px" />
+                    <button type="submit" class="btn btn-primary">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="hideEdit@(s.Id)()">Cancel</button>
+                  </form>
+                </td>
+              </tr>
+              <script>
+                function showEdit@(s.Id)() {
+                  document.getElementById('edit-row-@s.Id').style.display = 'table-row';
+                }
+                function hideEdit@(s.Id)() {
+                  document.getElementById('edit-row-@s.Id').style.display = 'none';
+                }
+              </script>
+            }
+          </tbody>
+        </table>
+      }
+    </section>
+
+    <section class="section-card">
+      <h2>Counts Chart</h2>
+      <canvas id="countsChart" height="120"></canvas>
+      <script>
+        const chartData = @Html.Raw(chartJson);
+        const labels = chartData.map(s => s.title ?? 'n/a');
+        const cards = chartData.map(s => s.cards ?? 0);
+        const simpleCards = chartData.map(s => s.simpleCards ?? 0);
+
+        const ctx = document.getElementById('countsChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels,
+            datasets: [
+              { label: 'Cards', data: cards, backgroundColor: 'rgba(11,94,215,0.8)' },
+              { label: 'SimpleCards', data: simpleCards, backgroundColor: 'rgba(11,138,215,0.6)' }
+            ]
+          },
+          options: {
+            responsive: true,
+            scales: {
+              x: { stacked: false },
+              y: { beginAtZero: true }
+            }
+          }
+        });
+      </script>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <small>Auto-migrations & seeder run on startup.</small>
+  </footer>
+</body>
+</html>
