@@ -208,3 +208,26 @@ body {
 
 .footer { text-align:center; color:var(--muted); padding:1rem 0; font-size:0.85rem; }
 .empty { padding:2rem; text-align:center; color:var(--muted); }
+
+/* Image upload and preview */
+.file-upload-label {
+  cursor: pointer;
+}
+.file-info {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.image-preview {
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+}
+.table-thumbnail {
+  max-width: 60px;
+  max-height: 60px;
+  object-fit: cover;
+  border-radius: 4px;
+  border: 1px solid #e5e7eb;
+}
+.featured-row {
+  background: rgba(255, 247, 230, 0.3);
+}

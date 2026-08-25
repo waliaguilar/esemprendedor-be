@@ -1,4 +1,5 @@
 using System.Text.Json;
+using EsemprendedorApi.Application.Services.Interfaces;
 using EsemprendedorApi.Infrastructure.Persistence;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -11,7 +12,20 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
     {
         private readonly AppDbContext _db;
         private readonly IWebHostEnvironment _env;
-        public IndexModel(AppDbContext db, IWebHostEnvironment env) { _db = db; _env = env; }
+        private readonly IImageStorageService _imageStorage;
+        private readonly ILogger<IndexModel> _logger;
+
+        public IndexModel(
+            AppDbContext db, 
+            IWebHostEnvironment env,
+            IImageStorageService imageStorage,
+            ILogger<IndexModel> logger)
+        {
+            _db = db;
+            _env = env;
+            _imageStorage = imageStorage;
+            _logger = logger;
+        }
 
         public List<CardView> Cards { get; set; } = new();
         public List<SectionOption> SectionsList { get; set; } = new();
@@ -93,6 +107,26 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
         {
             if (Input == null) return BadRequest();
 
+            // Handle image upload if provided
+            string? imageUrl = null;
+            if (Input.ImageFile != null && Input.ImageFile.Length > 0)
+            {
+                try
+                {
+                    using var stream = Input.ImageFile.OpenReadStream();
+                    imageUrl = await _imageStorage.UploadImageAsync(
+                        stream,
+                        Input.ImageFile.FileName,
+                        Input.ImageFile.ContentType);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to upload image for card");
+                    ModelState.AddModelError("Input.ImageFile", "Failed to upload image. Please try again.");
+                    return Page();
+                }
+            }
+
             var card = new Domain.Entities.Card
             {
                 SectionId = Input.SectionId,
@@ -102,7 +136,7 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
                 Service = Input.Service?.Trim() ?? string.Empty,
                 Contact = Input.Contact?.Trim() ?? string.Empty,
                 Featured = Input.Featured,
-                BackgroundImage = string.IsNullOrWhiteSpace(Input.BackgroundImage) ? null : Input.BackgroundImage.Trim(),
+                BackgroundImage = imageUrl ?? (string.IsNullOrWhiteSpace(Input.BackgroundImage) ? null : Input.BackgroundImage.Trim()),
                 Keywords = string.IsNullOrWhiteSpace(Input.Keywords) ? null : Input.Keywords.Trim()
             };
 
@@ -118,6 +152,37 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
             var card = await _db.Cards.FindAsync(id);
             if (card == null) return NotFound();
 
+            // Handle image upload if provided
+            if (Input.ImageFile != null && Input.ImageFile.Length > 0)
+            {
+                try
+                {
+                    // Delete old image if exists
+                    if (!string.IsNullOrWhiteSpace(card.BackgroundImage))
+                    {
+                        await _imageStorage.DeleteImageAsync(card.BackgroundImage);
+                    }
+
+                    // Upload new image
+                    using var stream = Input.ImageFile.OpenReadStream();
+                    card.BackgroundImage = await _imageStorage.UploadImageAsync(
+                        stream,
+                        Input.ImageFile.FileName,
+                        Input.ImageFile.ContentType);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Failed to upload image for card {CardId}", id);
+                    ModelState.AddModelError("Input.ImageFile", "Failed to upload image. Please try again.");
+                    return Page();
+                }
+            }
+            else if (!string.IsNullOrWhiteSpace(Input.BackgroundImage))
+            {
+                // Keep or update URL manually if no file uploaded
+                card.BackgroundImage = Input.BackgroundImage.Trim();
+            }
+
             card.SectionId = Input.SectionId;
             card.Icon = Input.Icon?.Trim() ?? string.Empty;
             card.Chip = Input.Chip?.Trim() ?? string.Empty;
@@ -125,7 +190,6 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
             card.Service = Input.Service?.Trim() ?? string.Empty;
             card.Contact = Input.Contact?.Trim() ?? string.Empty;
             card.Featured = Input.Featured;
-            card.BackgroundImage = string.IsNullOrWhiteSpace(Input.BackgroundImage) ? null : Input.BackgroundImage.Trim();
             card.Keywords = string.IsNullOrWhiteSpace(Input.Keywords) ? null : Input.Keywords.Trim();
 
             await _db.SaveChangesAsync();
@@ -136,6 +200,20 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
         {
             var card = await _db.Cards.FindAsync(id);
             if (card == null) return NotFound();
+
+            // Delete associated image if exists
+            if (!string.IsNullOrWhiteSpace(card.BackgroundImage))
+            {
+                try
+                {
+                    await _imageStorage.DeleteImageAsync(card.BackgroundImage);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogWarning(ex, "Failed to delete image for card {CardId}", id);
+                    // Continue with card deletion even if image deletion fails
+                }
+            }
 
             _db.Cards.Remove(card);
             await _db.SaveChangesAsync();
@@ -175,6 +253,7 @@ namespace EsemprendedorApi.Pages.Dashboard.Cards
             public bool Featured { get; set; }
             public string? BackgroundImage { get; set; }
             public string? Keywords { get; set; }
+            public IFormFile? ImageFile { get; set; }
         }
 
         private class MockCardDto
